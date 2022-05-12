@@ -1,0 +1,39 @@
+html {
+  font-family: Courier New;
+}
+ul li {
+    list-style-type: none;
+}
+ul {
+  margin: 0%;
+}
+h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.group {
+  display: flex;
+}
+
+
+
+.year {
+  border-left: 2px solid black;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1%;
+}
+
+.events {
+  padding: 1% 1% 1% 1%;
+  width: 100%;
+  text-align: right;
+  border-bottom: 2px solid black;
+}
+
+.top-event {
+  border-top: 2px solid black;
+}
