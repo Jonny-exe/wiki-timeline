@@ -1,19 +1,16 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
-
-<h1>Information</h1>
-{% for events in grouped_events %}
-      <div class="group">
-        <div class="events {% if not forloop.counter0 %} top-event {% endif %}">
-          <ul>
-          {% for event in events %}
-          <li><a href="{{event.link}}">{{ event.title }}</a></li>
-          {% endfor %}
-          </ul>
-        </div>
-        <div class="year">
-          <b><i>{{ events.0.date }}</i></b>
-        </div>
-      </div>
-{% endfor %}
+<body class="search-body">
+Search
+<form method="POST" action="/app/info">
+    {% csrf_token %}
+    <div class="flex margin">
+    <input class="margin small" type="number" name="from" value="" placeholder="0000"></input>
+    -
+    <input class="margin small" type="number" name="to" value="" placeholder="2030"></input>
+    </div>
+    <textarea class="margin" type="text" name="tags" value="" placeholder="tag1, tag2, tag3"></textarea>
+    <button class="margin" type="submit">Let's Go</button>
+</form>
+</body>

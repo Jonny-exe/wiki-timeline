@@ -4,6 +4,11 @@ class Event(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
     link = models.CharField(max_length=400)
+    tags = ArrayField(models.ForeignKey(Tag, on_delete=models.CASCADE))
+
+class Tag(models.Model)
+    title = models.CharField(max_length=30)
+
 
 def group_events_by_year(events: []):
     grouped_events = [[]]

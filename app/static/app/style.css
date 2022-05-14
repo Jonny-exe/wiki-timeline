@@ -12,10 +12,60 @@ h1 {
   width: 100%;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+textarea {
+  resize: vertical
+}
+
+.margin-left {
+  margin-left: 1%;
+}
+
+
+.margin-rigth {
+  margin-right: 1%;
+}
+
+.small {
+  width: 20%;
+}
+
+.margin {
+  margin: 1%;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .group {
   display: flex;
 }
 
+.search-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
 
 
 .year {
