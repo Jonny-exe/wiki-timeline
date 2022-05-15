@@ -12,5 +12,13 @@ Search
     </div>
     <textarea class="margin" type="text" name="tags" value="" placeholder="tag1, tag2, tag3"></textarea>
     <button class="margin" type="submit">Let's Go</button>
+    <a href="/app?showtags=true">Find tags</a>
+    {% if showtags %}
+      <ul>
+      {% for tag in tags %}
+      <li><a href="/app?{{url}}&newtag={{tag.name}}">{{ tag.name }}</a></li>
+      {% endfor %}
+      </ul>
+    {% endif %}
 </form>
 </body>

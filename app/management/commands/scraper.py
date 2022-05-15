@@ -30,18 +30,18 @@ queries = [
 ]
 
 MONTHS = {
-"January": 1,
-"February": 2,
-"March": 3,
-"April": 4,
-"May": 5,
-"June": 6,
-"July": 7,
-"August": 8,
-"September": 9,
-"October": 10,
-"November": 11,
-"December": 12
+    "January": 1,
+    "February": 2,
+    "March": 3,
+    "April": 4,
+    "May": 5,
+    "June": 6,
+    "July": 7,
+    "August": 8,
+    "September": 9,
+    "October": 10,
+    "November": 11,
+    "December": 12
 }
 def get_event_date(page: str) -> str:
     for q in queries:
@@ -65,11 +65,15 @@ def get_event_date(page: str) -> str:
     return out + [1] * (3-len(out))
 
 def get_tags(page: str):
-    query = "((?:>)([a-zA-Z\s0-9]+?)(?:<))+"
-    m = re.search(query, page)
+    page = page[page.find(">Categories</a>:"):]
+    query = "(?:(?:>)([a-zA-Z\s0-9]+?)(?:</a>))+"
+    m = re.findall(query, page)
+
+    m.pop(0)
     tags = []
     for match in m:
-        tags.append(tags.group(2))
+        tags.append(match)
+    print(tags)
     return tags
 
 def test_website(l: str):
@@ -102,14 +106,18 @@ queue = queue.Queue()
 # queue.put(start)
 queue.put("/wiki/Maquis_du_Mont_Mouchet")
 
-
+TAGS = {}
+def init_tags():
+    tags = Tag.objects.all()
+    for tag in tags:
+        TAGS[tag.name] = tag.id
 
 def scrape():
     while not queue.empty():
         l = queue.get()
         print(l)
 
-        if l in store:
+        if l in store and not queue.empty():
             continue
         store[l] = True
 
@@ -125,6 +133,8 @@ def scrape():
         data = data.replace("&#160;", " ")
         # data = data.replace(b'\xe2\x80\x94'.decode('utf-8'), '-')
         date = get_event_date(data)
+        tags = get_tags(data)
+        print(tags)
         if date is not None:
             try:
                 d = datetime.datetime(date[0], date[1], date[2])
