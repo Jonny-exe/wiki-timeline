@@ -16,6 +16,7 @@ def info(request):
     except:
         redirect("/app/")
 
+
     try:
         # events = Event.objects.all()
         events = Event.objects.filter(date__range=["%s-01-01" % from_year, "%s-01-01" % to_year]).order_by('date')
@@ -26,7 +27,8 @@ def info(request):
     # return render(request, 'app/index.html', {"text": "Welcome", "events": events})
     return render(request, 'app/info.html', {"grouped_events": grouped_events})
 
-def index(request):
+def index(request, name):
+    print(name)
     showtags = False
     tags = []
     try:
@@ -35,15 +37,14 @@ def index(request):
         if request.GET["filter"] is not None:
             tags = tags.filter(name__icontains=request.GET["filter"])
         if request.GET["newtag"] is not None:
-            del request.GET["newtag"]
+            redirect("/app?showtags=true")
     except Exception as e:
         print(e)
 
-    redirect("/app/")
 
     url = urlencode(dict(request.GET))
     print(unquote(url))
-    return render(request, 'app/index.html', {"url": url, "showtags": showtags, "tags": tags})
+    return render(request, 'app/index.html', {"name": name, "showtags": showtags, "tags": tags})
 
 def tags(request):
     print(request.GET["tags"])

@@ -3,7 +3,7 @@ import requests
 import shelve
 import queue
 import datetime
-from app.models import Event
+from app.models import Event, Tag, EventTag
 from django.core.management.base import BaseCommand, CommandError
 import unicodedata
 
@@ -65,10 +65,11 @@ def get_event_date(page: str) -> str:
     return out + [1] * (3-len(out))
 
 def get_tags(page: str):
-    page = page[page.find(">Categories</a>:"):]
+    page = page[page.find(">Categories</a>:"):page.find("This page was last edited")]
     query = "(?:(?:>)([a-zA-Z\s0-9]+?)(?:</a>))+"
     m = re.findall(query, page)
-
+    if len(m) == 0:
+        return []
     m.pop(0)
     tags = []
     for match in m:
@@ -101,7 +102,7 @@ def get_links(page: str) -> list:
 
 start = '/wiki/Mexican_Dirty_War'
 links = []
-wrong_prefixes = ["/wiki/Wikipedia", "/wiki/Special", "/wiki/File", "/wiki/Help", "/wiki/SVG", "/wiki/Template"]
+wrong_prefixes = ["/wiki/Wikipedia", "/wiki/Category", "wiki/Main_Page", "/wiki/Special", "/wiki/File", "/wiki/Help", "/wiki/SVG", "/wiki/Template"]
 queue = queue.Queue()
 # queue.put(start)
 queue.put("/wiki/Maquis_du_Mont_Mouchet")
@@ -142,8 +143,15 @@ def scrape():
                 d = datetime.datetime(day=date[0], month=date[1], year=date[2])
                 pass
             title =l[6:].replace("_", " ")
-            Event.objects.create(title=title, date=d, link="https://en.wikipedia.org"+l)
+            event = Event.objects.create(title=title, date=d, link="https://en.wikipedia.org"+l)
             print(l, d)
+
+            for t in tags:
+                try:
+                    tag = Tag.objects.get(name=t)
+                except Tag.DoesNotExist:
+                    tag = Tag.objects.create(name=t)
+                EventTag.objects.create(event_id=event.id, tag_id=tag.id)
 
         new_links = get_links(data)
         for link in new_links:

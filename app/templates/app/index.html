@@ -2,23 +2,28 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}">
 <body class="search-body">
-Search
+
 <form method="POST" action="/app/info">
     {% csrf_token %}
+    <div class="search-bar border">
+    <h2>Search</h2>
+
     <div class="flex margin">
     <input class="margin small" type="number" name="from" value="" placeholder="0000"></input>
     -
     <input class="margin small" type="number" name="to" value="" placeholder="2030"></input>
     </div>
-    <textarea class="margin" type="text" name="tags" value="" placeholder="tag1, tag2, tag3"></textarea>
+    <textarea class="margin" type="text" name="tags" value="" placeholder="tag1, tag2, tag3">{{name}}</textarea>
     <button class="margin" type="submit">Let's Go</button>
-    <a href="/app?showtags=true">Find tags</a>
-    {% if showtags %}
-      <ul>
-      {% for tag in tags %}
-      <li><a href="/app?{{url}}&newtag={{tag.name}}">{{ tag.name }}</a></li>
-      {% endfor %}
-      </ul>
-    {% endif %}
+    </div>
+
+    <div class="tags center border">
+      <b><a class="fill" href="{% url 'index' name=name %}?showtags=true">Find tags</a></b>
+      {% if showtags %}
+        {% for tag in tags %}
+        <p><a href="{% url 'index' name=name|add:','|add:tag.name %}?showtags=true">{{ tag.name }}</a></p>
+        {% endfor %}
+      {% endif %}
+    </div>
 </form>
 </body>

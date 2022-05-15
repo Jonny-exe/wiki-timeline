@@ -12,9 +12,28 @@ h1 {
   width: 100%;
 }
 
+p {
+  margin: 0% 1% 0% 1%;
+}
+
+.border {
+  border: solid 2px black;
+  padding: 1%;
+}
+
+.tags {
+  max-height: 30vh;
+  margin-top: 10%;
+  overflow-y: scroll;
+}
+
 form {
   display: flex;
   flex-direction: column;
+}
+
+.center {
+  text-align: center;
 }
 
 .flex {
@@ -23,8 +42,14 @@ form {
   align-items: center;
   justify-content: center;
 }
+
+.fill {
+  width: 100%;
+}
+
 textarea {
-  resize: vertical
+  resize: vertical;
+  width: 96%;
 }
 
 .margin-left {
@@ -67,6 +92,12 @@ input::-webkit-inner-spin-button {
   height: 100%;
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .year {
   border-left: 2px solid black;

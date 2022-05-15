@@ -1,0 +1,5 @@
+wikitimeline/__pycache__
+app/__pycache__
+wikitimeline/settings.py
+store
+db.sqlite3
