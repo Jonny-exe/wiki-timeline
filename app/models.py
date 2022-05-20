@@ -1,17 +1,14 @@
 from django.db import models
 from urllib.parse import unquote
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
     link = models.CharField(max_length=400)
-    # tags = models.ArrayField(models.ForeignKey(Tag, on_delete=models.CASCADE))
+    tags = models.CharField(max_length=800)
 
 class Tag(models.Model):
     name = models.CharField(max_length=30)
-
-class EventTag(models.Model):
-    event_id = models.IntegerField()
-    tag_id = models.IntegerField()
 
 def group_events_by_year(events: []):
     grouped_events = [[]]

@@ -3,7 +3,7 @@ import requests
 import shelve
 import queue
 import datetime
-from app.models import Event, Tag, EventTag
+from app.models import Event, Tag
 from django.core.management.base import BaseCommand, CommandError
 import unicodedata
 
@@ -143,7 +143,9 @@ def scrape():
                 d = datetime.datetime(day=date[0], month=date[1], year=date[2])
                 pass
             title =l[6:].replace("_", " ")
-            event = Event.objects.create(title=title, date=d, link="https://en.wikipedia.org"+l)
+            tags_str = ",".join(tags)
+            print(len(tags_str))
+            event = Event.objects.create(title=title, date=d, link="https://en.wikipedia.org"+l, tags=tags_str)
             print(l, d)
 
             for t in tags:
@@ -151,7 +153,6 @@ def scrape():
                     tag = Tag.objects.get(name=t)
                 except Tag.DoesNotExist:
                     tag = Tag.objects.create(name=t)
-                EventTag.objects.create(event_id=event.id, tag_id=tag.id)
 
         new_links = get_links(data)
         for link in new_links:

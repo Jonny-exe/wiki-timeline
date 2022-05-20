@@ -1,0 +1,125 @@
+html {
+  font-family: Courier New;
+}
+ul li {
+    list-style-type: none;
+}
+ul {
+  margin: 0%;
+}
+h1 {
+  text-align: center;
+  width: 100%;
+}
+
+p {
+  margin: 0% 1% 0% 1%;
+}
+
+.border {
+  border: solid 2px black;
+  padding: 1%;
+}
+
+.tags {
+  max-height: 30vh;
+  margin-top: 10%;
+  overflow-y: scroll;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.index-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.fill {
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  width: 96%;
+}
+
+.margin-left {
+  margin-left: 1%;
+}
+
+
+.margin-rigth {
+  margin-right: 1%;
+}
+
+.small {
+  width: 20%;
+}
+
+.margin {
+  margin: 1%;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.group {
+  display: flex;
+}
+
+.search-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.year {
+  border-left: 2px solid black;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1%;
+}
+
+.events {
+  padding: 1% 1% 1% 1%;
+  width: 100%;
+  text-align: right;
+  border-bottom: 2px solid black;
+}
+
+.top-event {
+  border-top: 2px solid black;
+}
