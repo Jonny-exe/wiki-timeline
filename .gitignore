@@ -1,5 +1,7 @@
 wikitimeline/__pycache__
 app/__pycache__
 wikitimeline/settings.py
+app/management/commands/__pycache__
 store
 db.sqlite3
+queue

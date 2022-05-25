@@ -74,7 +74,6 @@ def get_tags(page: str):
     tags = []
     for match in m:
         tags.append(match)
-    print(tags)
     return tags
 
 def test_website(l: str):
@@ -132,9 +131,14 @@ def scrape():
         data = response.content.decode('utf-8')
         data = data.replace("&#160;", " ")
         # data = data.replace(b'\xe2\x80\x94'.decode('utf-8'), '-')
+
+
         date = get_event_date(data)
+        # print(data)
+        f = open("test", "w").write(data)
+        # print("date: ", date, "'", l, "'", len(data))
+
         tags = get_tags(data)
-        print(tags)
         if date is not None:
             try:
                 d = datetime.datetime(date[0], date[1], date[2])
@@ -143,7 +147,6 @@ def scrape():
                 pass
             title =l[6:].replace("_", " ")
             tags_str = ",".join(tags)
-            print(len(tags_str))
             event = Event.objects.create(title=title, date=d, link="https://en.wikipedia.org"+l, tags=tags_str)
             print(l, d)
 
@@ -157,11 +160,15 @@ def scrape():
         for link in new_links:
             queue.put(link)
 try:
-    queue.put("/wiki/Maquis_du_Mont_Mouchet")
+    try:
+        f = open("queue", "x")
+    except:
+        pass
+        
     f = open("queue").read()
     for item in f.split(",,,"):
+        item = item.strip("\n")
         queue.put(item)
-
     scrape()
 
 except KeyboardInterrupt:
@@ -169,8 +176,7 @@ except KeyboardInterrupt:
     f = open("queue", "w")
     while not queue.empty():
         list += queue.get() + ",,,"
-    print(list)
     f.write(list)
     f.close()
     exit()
-    # test_website("/wiki/Maquis_du_Mont_Mouchet")
+    # test_website("//wiki/Maquis_du_Mont_Mouchet")
