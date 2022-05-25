@@ -127,17 +127,10 @@ def scrape():
         if stop:
             continue
         response = requests.get("https://en.wikipedia.org%s" % l)
-        # data = response.content.decode('utf-8').replace("&#160;", " ").replace("–".encode('utf-8'), "-")
         data = response.content.decode('utf-8')
         data = data.replace("&#160;", " ")
-        # data = data.replace(b'\xe2\x80\x94'.decode('utf-8'), '-')
-
-
+        
         date = get_event_date(data)
-        # print(data)
-        f = open("test", "w").write(data)
-        # print("date: ", date, "'", l, "'", len(data))
-
         tags = get_tags(data)
         if date is not None:
             try:
@@ -164,7 +157,7 @@ try:
         f = open("queue", "x")
     except:
         pass
-        
+
     f = open("queue").read()
     for item in f.split(",,,"):
         item = item.strip("\n")
