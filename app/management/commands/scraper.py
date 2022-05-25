@@ -105,7 +105,6 @@ links = []
 wrong_prefixes = ["/wiki/Wikipedia", "/wiki/Category", "wiki/Main_Page", "/wiki/Special", "/wiki/File", "/wiki/Help", "/wiki/SVG", "/wiki/Template"]
 queue = queue.Queue()
 # queue.put(start)
-queue.put("/wiki/Maquis_du_Mont_Mouchet")
 
 TAGS = {}
 def init_tags():
@@ -157,6 +156,21 @@ def scrape():
         new_links = get_links(data)
         for link in new_links:
             queue.put(link)
+try:
+    queue.put("/wiki/Maquis_du_Mont_Mouchet")
+    f = open("queue").read()
+    for item in f.split(",,,"):
+        queue.put(item)
 
-scrape()
-# test_website("/wiki/Maquis_du_Mont_Mouchet")
+    scrape()
+
+except KeyboardInterrupt:
+    list = ""
+    f = open("queue", "w")
+    while not queue.empty():
+        list += queue.get() + ",,,"
+    print(list)
+    f.write(list)
+    f.close()
+    exit()
+    # test_website("/wiki/Maquis_du_Mont_Mouchet")
