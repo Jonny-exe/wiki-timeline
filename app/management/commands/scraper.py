@@ -24,6 +24,7 @@ queries = [
     (r">Date<\/th><td.*?>(\d{1,2}) (January|February|March|April|May|June|July|August|September|October|November|December)\s?(?:-|–)\s?(?:\d{1,2}) (?:January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,4})", 3,  [3, 2, 1]),
     (r">Date<\/th><td.*?>(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,4})\s?(?:-|–)\s?(?:January|February|March|April|May|June|July|August|September|October|November|December) (?:\d{1,4})", 2, [2, 1]),
     (r">Date<\/th><td.*?>(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}),? (\d{1,4})", 3, [2, 3, 1]),
+    (r">Date<\/th><td.*?>(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2})\s?(?:-|–)\s?(?:January|February|March|April|May|June|July|August|September|October|November|December) (?:\d{1,2}),\s?(\d{1,4})", 3, [2, 3, 1]),
     (r">Date<\/th><td.*?>(\d{1,2}) ?(?:-|–) ?\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,4})", 3, [3, 2, 1]),
     (r">Date<\/th><td.*?>(\d{1,4}) ?(?:-|–) ?(?:\d{1,4})", 1, [1]),
     (r">Date<\/th><td.*?>(\d{1,4})", 1, [1]),
@@ -129,7 +130,7 @@ def scrape():
         response = requests.get("https://en.wikipedia.org%s" % l)
         data = response.content.decode('utf-8')
         data = data.replace("&#160;", " ")
-        
+
         date = get_event_date(data)
         tags = get_tags(data)
         if date is not None:
