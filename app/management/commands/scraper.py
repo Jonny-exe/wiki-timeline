@@ -102,7 +102,9 @@ def get_links(page: str) -> list:
 
 start = '/wiki/Mexican_Dirty_War'
 links = []
-wrong_prefixes = ["/wiki/Wikipedia", "/wiki/Category", "wiki/Main_Page", "/wiki/Special", "/wiki/File", "/wiki/Help", "/wiki/SVG", "/wiki/Template"]
+wrong_prefixes = ["/wiki/Wikipedia", "/wiki/Category", "wiki/Main_Page",
+                  "/wiki/Special", "/wiki/File", "/wiki/Help", "/wiki/SVG",
+                  "/wiki/Template", "/wiki/User"]
 queue = queue.Queue()
 # queue.put(start)
 

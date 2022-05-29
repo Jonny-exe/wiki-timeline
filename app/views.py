@@ -16,7 +16,7 @@ def info(request):
         if tags[0] == "":
             tags.pop(0)
     except:
-        redirect("/app/")
+        redirect("/")
 
     try:
         events = Event.objects.filter(date__range=["%s-01-01" % from_year, "%s-12-31" % to_year]).order_by('date')

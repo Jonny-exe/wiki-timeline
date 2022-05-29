@@ -4,7 +4,7 @@
 <body class="search-body">
 <form method="GET" id="get-form" action="{% url 'index' name=name %}">
 </form>
-<form method="POST" id="post-form" action="/app/info">{% csrf_token %}
+<form method="POST" id="post-form" action="/info">{% csrf_token %}
 </form>
 
 <div class="index-div">
