@@ -4,7 +4,7 @@ dated between two dates.
 
 *You can't find every article, only the ones I was able to scrape.*
 
-You can check it out at [jonny.sytes.net/wikipedia](https://jonny.sytes.net/wikipedia)
+You can check it out at [jonny.sytes.net/wikipedia](https://jonny.sytes.net/wiki)
 
 ## How it works
 This works by scraping all the possible wikipedia articles and getting their dates. After that, everything else is storing it on a database and looking it up.
